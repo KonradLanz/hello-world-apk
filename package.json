@@ -1,0 +1,13 @@
+{
+  "name": "hello-world-apk",
+  "version": "1.0.0",
+  "description": "Hello World Cordova app, editable via Acode, built to APK via GitHub Actions.",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "cordova-android": "^12.0.1"
+  }
+}

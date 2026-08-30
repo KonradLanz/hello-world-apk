@@ -1,0 +1,50 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  background: #0f766e;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  text-align: center;
+  padding: 32px;
+  max-width: 90%;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+#subtitle {
+  font-size: 20px;
+  opacity: 0.85;
+  margin-bottom: 40px;
+}
+
+button {
+  font-size: 22px;
+  padding: 20px 36px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f766e;
+  font-weight: bold;
+  min-height: 44px;
+}
+
+button:active {
+  background: #e5e5e5;
+}
+
+#counterText {
+  margin-top: 24px;
+  font-size: 18px;
+  opacity: 0.9;
+}
