@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,23 +29,31 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Accept Android SDK licenses
+        run: yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
+
+      - name: Install required SDK packages
+        run: |
+          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+            "platform-tools" \
+            "platforms;android-33" \
+            "build-tools;33.0.2" > /dev/null
 
       - name: Install Cordova
         run: npm install -g cordova
 
       - name: Add Android platform
-        run: cordova platform add android
+        run: cordova platform add android@12
 
       - name: Build APK (debug)
-        run: cordova build android
+        run: cordova build android --verbose
 
       - name: Find APK
         id: findapk
         run: |
           APK_PATH=$(find platforms/android -name "*.apk" | head -n 1)
           echo "apk_path=$APK_PATH" >> "$GITHUB_OUTPUT"
+          echo "Found APK: $APK_PATH"
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
